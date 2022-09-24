@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
+	import { marker } from './Store.js';
 	import mapboxgl from 'mapbox-gl';
 
 	let container;
@@ -20,6 +21,14 @@
 			map.addSource('mapbox-terrain', {
 				type: 'vector',
 				url: 'mapbox://mapbox.mapbox-terrain-v2'
+			});
+
+			map.on('click', e => {
+				marker.update(m => m.remove());
+				marker.set(new mapboxgl.Marker({ draggable: true })
+					.setLngLat(e.lngLat)
+					.addTo(map)
+				)
 			});
 
 			map.addLayer({
