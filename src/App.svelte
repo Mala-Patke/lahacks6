@@ -8,13 +8,6 @@
 </main>
 
 <style>
-  .main {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: blue;
-  }
-
   .overlay {
     width: 20px;
     height: 20px;
@@ -23,5 +16,4 @@
     z-index: 2;
     background-color: white;
   }
-
 </style>
