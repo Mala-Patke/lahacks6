@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
 	import mapboxgl, { Map } from 'mapbox-gl';
+	import { marker } from './Store';
 
 	let container: HTMLElement;
 
