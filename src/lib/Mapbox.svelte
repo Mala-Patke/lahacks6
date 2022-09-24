@@ -12,12 +12,29 @@
 			container: container, // container ID
 			style: 'mapbox://styles/mapbox/streets-v11', // style URL
 			center: [-74.5, 40], // starting position [lng, lat]
-			zoom: 9, // starting zoom
-			projection: { name: 'globe' } // display the map as a 3D globe
+			zoom: 9 // starting zoom
 		});
 
 		map.on('style.load', () => {
-			map.setFog({}); // Set the default atmosphere style
+			map.addSource('mapbox-terrain', {
+				type: 'vector',
+				url: 'mapbox://mapbox.mapbox-terrain-v2'
+			});
+
+			map.addLayer({
+				id: 'terrain-data',
+				type: 'line',
+				source: 'mapbox-terrain',
+				'source-layer': 'contour',
+				layout: {
+					'line-join': 'round',
+					'line-cap': 'round'
+				},
+				paint: {
+					'line-color': '#ff69b4',
+					'line-width': 1
+				}
+			});
 		});
 	});
 </script>
