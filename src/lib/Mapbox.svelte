@@ -10,7 +10,7 @@
 	onMount(() => {
 		const map = new mapboxgl.Map({
 			container: container, // container ID
-			style: 'mapbox://styles/mapbox/streets-v11', // style URL
+			style: 'mapbox://styles/mapbox/dark-v10', //'mapbox://styles/mapbox/streets-v11', // style URL
 			center: [-74.5, 40], // starting position [lng, lat]
 			zoom: 9 // starting zoom
 		});
@@ -63,6 +63,7 @@
 	@import 'mapbox-gl/dist/mapbox-gl.css';
 
 	div {
-		min-height: 300px;
+		height: 100vh;
+		width: 100vw;
 	}
 </style>
