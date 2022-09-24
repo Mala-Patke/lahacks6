@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
-	import mapboxgl from 'mapbox-gl';
+	import mapboxgl, { Map, Point } from 'mapbox-gl';
 
-	let container;
+	let container: HTMLElement;
 
 	mapboxgl.accessToken = token;
 
 	onMount(() => {
-		const map = new mapboxgl.Map({
-			container: container, // container ID
-			style: 'mapbox://styles/mapbox/dark-v10', //'mapbox://styles/mapbox/streets-v11', // style URL
-			center: [-74.5, 40], // starting position [lng, lat]
-			zoom: 9 // starting zoom
+		const map = new Map({
+			container,
+			style: 'mapbox://styles/mapbox/dark-v10',
+			center: [-122.031028, 37.410761], // starting position [lng, lat]
+			zoom: 11
 		});
 
 		map.on('style.load', () => {
