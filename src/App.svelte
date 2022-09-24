@@ -3,17 +3,18 @@
 </script>
 
 <main>
-  <Mapbox class="main"></Mapbox>
+  <Mapbox />
   <div class="overlay">Stuff</div>
 </main>
 
 <style>
   .overlay {
-    width: 20px;
-    height: 20px;
-    margin-left: 100px;
+    width: 200px;
+    height: 200px;
+    /* margin-left: 100px; */
     position: absolute;
     z-index: 2;
     background-color: white;
+    text-decoration: black;
   }
 </style>
