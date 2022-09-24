@@ -16,6 +16,7 @@
 		});
 
 		map.on('style.load', () => {
+			// terrain
 			map.addSource('mapbox-terrain', {
 				type: 'vector',
 				url: 'mapbox://mapbox.mapbox-terrain-v2'
@@ -32,6 +33,23 @@
 				},
 				paint: {
 					'line-color': '#ff69b4',
+					'line-width': 1
+				}
+			});
+
+			// streets
+			map.addSource('mapbox-streets', {
+				type: 'vector',
+				url: 'mapbox://mapbox.mapbox-streets-v8'
+			});
+
+			map.addLayer({
+				id: 'street-data',
+				type: 'line',
+				source: 'mapbox-streets',
+				'source-layer': 'building',
+				paint: {
+					'line-color': '#69FFB4',
 					'line-width': 1
 				}
 			});
