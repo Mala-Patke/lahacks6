@@ -16,15 +16,16 @@
 			center: [-122.031028, 37.410761],
 			zoom: 5,
 			// prevent people from looking at missing data
-			maxBounds: [
+			/* maxBounds: [
 				[-168, -80],
 				[-21, 80]
-			]
+			] */
 		});
 
 		$map.on('buttonPressed', () => {
 			try {
 				$map.removeLayer('my-layer');
+				$map.removeLayer('fill-layer');
 				$map.removeSource('my-source');
 			} catch (e) {}
 
@@ -37,7 +38,7 @@
 						coordinates: [
 							pointsFromCircle(
 								[$marker.getLngLat().lng, $marker.getLngLat().lat],
-								0.1,
+								3, // 74 km radius and 111 km/lat
 								360
 							)
 						]
@@ -54,6 +55,17 @@
 					'line-width': 2
 				}
 			});
+
+			$map.addLayer({
+				id: 'fill-layer',
+				type: 'fill',
+				source: 'my-source',
+				paint: {
+					'fill-color': '#0080ff', // blue color fill
+					'fill-opacity': 0.5
+				}
+			});
+
 		});
 
 		$map.on('style.load', () => {
