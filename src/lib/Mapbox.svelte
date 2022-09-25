@@ -9,6 +9,21 @@
 
 	mapboxgl.accessToken = token;
 
+	function isInCircle(point: [number, number], center: [number, number], radius: number) {
+		/*
+			Step 1: Get circle center from the circle thing
+			Step 2: Calculate distance between center and first coordinate
+			Step 3: If distance > radius, it's inside. Get the feature property or whatever.
+			
+			common euclidean distance W
+			(don't tell anyone we're assuming the earth's surface is a cartesian plane)
+			(the cartographers will get mad)
+		*/
+
+		const distSqd = Math.pow(center[0] - point[0], 2) + Math.pow(center[1] - point[1], 2);
+		return distSqd <= Math.pow(radius, 2);
+	}
+
 	onMount(() => {
 		$map = new Map({
 			container,
@@ -31,9 +46,11 @@
 				$map.removeSource('flood-data');
 			}
 
+			const radius = Math.sqrt(55000 / Math.PI) / 111;
+
 			const circle = pointsFromCircle(
 				[$marker.getLngLat().lng, $marker.getLngLat().lat],
-				Math.sqrt(55000 / Math.PI) / 111, //Bruteforce the math lmao
+				radius, //Bruteforce the math lmao
 				360
 			);
 
@@ -67,60 +84,37 @@
 				}
 			});
 
-			let allFeatures = $map.querySourceFeatures('population', {
+			let popFeatures = $map.querySourceFeatures('population', {
 				sourceLayer: 'population'
 			});
 
+			let bldFeatures = $map.querySourceFeatures('mapbox-streets', {
+				sourceLayer: 'building'
+			});
+
+			const center: [number, number] = [$marker.getLngLat().lng, $marker.getLngLat().lat];
+
 			let population = 0;
-			for (let i = 0; i < allFeatures.length; i++) {
-				/*
-					Step 1: Get circle center from the circle thing
-					Step 2: Calculate distance between center and first coordinate
-					Step 3: If distance > radius, it's inside. Get the feature property or whatever.
-				*/
-
+			for (let i = 0; i < popFeatures.length; i++) {
 				// @ts-ignore THERE IS A COORDINATE HERE TRUST ME
-				const coordinate = allFeatures[i].geometry.coordinates[0][0];
-				const center: [number, number] = [$marker.getLngLat().lng, $marker.getLngLat().lat];
-
-				const distance = Math.sqrt(
-					Math.pow(coordinate[0] - center[0], 2) + Math.pow(coordinate[1] - center[1], 2)
-				);
-				const radius = Math.sqrt(
-					Math.pow(circle[0][0] - center[0], 2) + Math.pow(circle[0][1] - center[1], 2)
-				);
-
-				if (distance < radius) {
-					population += allFeatures[i].properties!.DN;
-				}
+				const popcoord = popFeatures[i].geometry.coordinates[0][0];
+				if (isInCircle(popcoord, center, radius))
+					population += popFeatures[i].properties!.DN;
 			}
 
+			// this is mildly stupid since querySourceFeatures only gets rendered objects
+			// and buildings only render when the map zoom is high enough to completely
+			// obscure all sides of the flood circle
+			// https://github.com/mapbox/mapbox-gl-js/issues/2481 fix your library
+			let buildings = 0;
+			for (let i = 0; i < bldFeatures.length; i++) {
+				// @ts-ignore here too
+				const bldcoord = bldFeatures[i].geometry.coordinates[0][0];
+				if (isInCircle(bldcoord, center, radius)) buildings++;
+			}
+			console.log(buildings);
+
 			stats.set(population);
-
-			/*
-			console.log(
-			 	$map.querySourceFeatures('population', {
-			 		sourceLayer: 'population',
-			 		filter: [
-						'within',
-			 			{
-			 				type: 'Feature',
-			 				geometry: {
-								type: 'LineString',
-								coordinates: bounds
-							},
-			 			}
-			 		]
-			 	}),
-			); */
-
-			/*$map.setFilter('population', [
-				'within',
-				{
-					type: 'Polygon',
-					coordinates: [circle]
-				}
-			]);*/
 		});
 
 		$map.on('style.load', () => {
