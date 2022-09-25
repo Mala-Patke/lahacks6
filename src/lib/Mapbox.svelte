@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
-	import mapboxgl from 'mapbox-gl';
+	import mapboxgl, { Map } from 'mapbox-gl';
+	import { marker } from './Store';
 
-	let container;
+	let container: HTMLElement;
 
 	mapboxgl.accessToken = token;
 
 	onMount(() => {
-		const map = new mapboxgl.Map({
-			container: container, // container ID
-			style: 'mapbox://styles/mapbox/streets-v11', // style URL
-			center: [-74.5, 40], // starting position [lng, lat]
-			zoom: 9 // starting zoom
+		const map = new Map({
+			container,
+			style: 'mapbox://styles/mapbox/dark-v10',
+			center: [-122.031028, 37.410761], // starting position [lng, lat]
+			zoom: 11
 		});
 
 		map.on('style.load', () => {
@@ -20,6 +21,11 @@
 			map.addSource('mapbox-terrain', {
 				type: 'vector',
 				url: 'mapbox://mapbox.mapbox-terrain-v2'
+			});
+
+			map.on('click', (e) => {
+				marker.update((m) => m.remove());
+				marker.set(new mapboxgl.Marker({ draggable: true }).setLngLat(e.lngLat).addTo(map));
 			});
 
 			map.addLayer({
@@ -63,6 +69,7 @@
 	@import 'mapbox-gl/dist/mapbox-gl.css';
 
 	div {
-		min-height: 300px;
+		height: 100vh;
+		width: 100vw;
 	}
 </style>
