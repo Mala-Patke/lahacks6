@@ -58,10 +58,7 @@
 
 		$map.on('style.load', () => {
 			$map.on('click', (e) => {
-				marker.update((m) => m.remove());
-				marker.set(
-					new mapboxgl.Marker({ draggable: true }).setLngLat(e.lngLat).addTo($map)
-				);
+				marker.update((marker) => marker.setLngLat(e.lngLat));
 			});
 
 			// terrain
