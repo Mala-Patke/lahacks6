@@ -10,9 +10,9 @@
 
 <style>
 	@font-face {
-        font-family: "DIN PRO";
-        src: url("../assets/DINPro400.otf");
-    }
+		font-family: 'DIN PRO';
+		src: url('../assets/DINPro400.otf');
+	}
 
 	div {
 		position: absolute;
@@ -21,9 +21,13 @@
 		z-index: 2;
 		background-color: gray;
 		border-radius: 5px;
-		width: 15%;
+		width: 10%;
 		height: 7.5%;
-		font-family: "DIN PRO";
+		font-family: 'DIN PRO';
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 
 	p {
