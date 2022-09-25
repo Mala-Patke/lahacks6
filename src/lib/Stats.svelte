@@ -4,10 +4,12 @@
 
 <div>
     Square Mileage flooded: <strong>55,000 km<sup>2</sup></strong>
-    Displaced people: <strong>{null}</strong>
-    Injuries: <strong>{null}</strong>
+    People Affected: <strong>{null}</strong>
+    People Temporarily Displaced: <strong>{null}</strong>
+    People in Shelters: <strong>{null}</strong>
     Fatalities: <strong>{null}</strong>
     Buildings damaged: <strong>{null}</strong>
+    Cost of Flooding: <strong>{null}</strong>
 
 </div>
 
