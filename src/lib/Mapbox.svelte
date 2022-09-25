@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
 	import mapboxgl, { Map } from 'mapbox-gl';
-	import { marker, map, lgnLatState } from './Store';
+	import { marker, map } from './Store';
 	import { pointsFromCircle } from './pointsFromCircle';
 
 	let container: HTMLElement;
