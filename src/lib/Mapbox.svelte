@@ -3,6 +3,7 @@
 	import { token } from './TOKEN.json';
 	import mapboxgl, { Map } from 'mapbox-gl';
 	import { marker } from './Store';
+	import { pointsFromCircle } from './pointsFromCircle';
 
 	let container: HTMLElement;
 
@@ -57,6 +58,28 @@
 				paint: {
 					'line-color': '#69FFB4',
 					'line-width': 1
+				}
+			});
+
+			// custom
+			map.addSource('my-source', {
+				type: 'geojson',
+				data: {
+					type: 'Feature',
+					geometry: {
+						type: 'Polygon',
+						coordinates: [pointsFromCircle([-122.02, 37.4], 0.1, 360)]
+					},
+					properties: null
+				}
+			});
+
+			map.addLayer({
+				id: 'my-layer',
+				type: 'line',
+				source: 'my-source',
+				paint: {
+					'line-width': 2
 				}
 			});
 		});
