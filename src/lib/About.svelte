@@ -31,6 +31,7 @@
         font-family: "DIN PRO";
         src: url("../assets/DINPro400.otf");
     }
+
 	.wrapper {
 		width: 100vw;
 		height: 100vh;
@@ -41,9 +42,10 @@
 		z-index: 3;
         font-family: "DIN PRO";
 	}
+
 	.modal {
-		width: 70%;
-		height: 70%;
+		width: 60%;
+		height: 60%;
 		position: fixed;
 		top: 50%;
 		left: 50%;
@@ -69,13 +71,14 @@
     }
 
     h2 {
-        font-size: 40px;
+        font-size: 36px;
     }
 
     p {
-        font-size: 28px;
+        font-size: 24px;
         line-height: 1.3em;
     }
+
 	.about-btn {
 		position: absolute;
 		right: 2vh;
@@ -83,6 +86,7 @@
         font-family: "DIN PRO";
         border: 1px solid rgba(255, 255, 255, 0.87);
 	}
+
 	.x-btn {
 		position: absolute;
 		right: 0;
