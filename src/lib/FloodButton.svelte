@@ -1,9 +1,9 @@
 <script lang="ts">
-import { map } from "./Store";
+	import { map } from './Store';
 </script>
 
 <div>
-    <button on:click={() => $map.fire('buttonPressed')}>Flood!</button>
+	<button on:click={() => $map.fire('buttonPressed')}>Flood!</button>
 </div>
 
 <style>
@@ -11,7 +11,8 @@ import { map } from "./Store";
         font-family: "DIN PRO";
         src: url("../assets/DINPro400.otf");
     }
-    button {
+
+	button {
 		position: absolute;
 		top: 40%;
 		left: 2%;
