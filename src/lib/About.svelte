@@ -10,12 +10,13 @@
 		<div class="modal">
 			<button class="x-btn" on:click={toggleModal}>x</button>
             <div>
-                <h2>About Flood is Thicker than Water</h2>
+                <h2>About "Flood is Thicker than Water"</h2>
                 <p>
-                    This summer, seasonal rains in Pakistan spiraled into extreme flooding, covering 1/3 of the 
+                    This summer (2022), seasonal rains in Pakistan spiraled into extreme flooding, covering 1/3 of the 
                     country and displacing 1/6 of the population. Often, tragedies like this must compete against 
-                    mainstream news and it's easy to lose sight of the humanity behind the statistics. Through 
-                    Flood is Thicker than Water, we aim to remove this separation and better capture the devastating impact of the floods.
+                    mainstream news, and when the media places an invisible wall between you and the experiences of those who suffer, 
+					it's easy to lose sight of the humanity behind the statistics. Through Flood is Thicker than Water, we aim to 
+					remove this separation and better capture the devastating impact of the floods.
                 </p>
             </div>
 		</div>
@@ -71,6 +72,7 @@
 
     h2 {
         font-size: 36px;
+		color: white;
     }
 
     p {
