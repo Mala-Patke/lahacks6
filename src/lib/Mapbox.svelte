@@ -17,8 +17,8 @@
 			zoom: 5,
 			// prevent people from looking at missing data
 			maxBounds: [
-				[-168, -80],
-				[-21, 80]
+				[-174.205883, -54.809886],
+				[0.002152, 76.41997]
 			]
 		});
 
@@ -30,6 +30,11 @@
 				$map.removeLayer('flood-fill');
 				$map.removeSource('flood-data');
 			}
+
+			const centerPoint: [number, number] = [
+				$marker.getLngLat().lng,
+				$marker.getLngLat().lat
+			];
 
 			const circle = pointsFromCircle(
 				[$marker.getLngLat().lng, $marker.getLngLat().lat],

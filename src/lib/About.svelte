@@ -12,10 +12,10 @@
             <div>
                 <h2>About Project Name</h2>
                 <p>
-                    Each topic presents distinct yet related questions with varying scope and scale in 
-                    time, space, and the people involved. Attempts to understand and manage the mechanisms at work 
-                    in floodplains have been made for six millennia. Flood waters typically inundate farm 
-                    land, making the land unworkable and preventing crops from being planted or harvested.
+                    This summer, seasonal rains in Pakistan spiraled into extreme flooding, covering 1/3 of the 
+                    country and displacing 1/6 of the population. Often, tragedies like this must compete against 
+                    mainstream news and it's easy to lose sight of the humanity behind the statistics. Through 
+                    [PROJECT NAME], we aim to remove this separation and better capture the devastating impact of the floods.
                 </p>
             </div>
 		</div>
@@ -53,7 +53,6 @@
 		background-color: #242424;
 		border: 5px solid #35A2C3;
 		border-radius: 15px;
-
 	}
 
     .modal div {
