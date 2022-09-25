@@ -1,14 +1,11 @@
 <script lang="ts">
+	import { prettyPrintDecimalDegrees } from './formatLatOrLng';
 	import { marker } from './Store';
-
-	function round(num: number) {
-		return Math.round(num * 100) / 100;
-	}
 </script>
 
 <div>
-	<p>Lat: {round($marker.getLngLat()?.lat)}</p>
-	<p>Lon: {round($marker.getLngLat()?.lng)}</p>
+	<p>{prettyPrintDecimalDegrees($marker.getLngLat()?.lat, 'lat')}</p>
+	<p>{prettyPrintDecimalDegrees($marker.getLngLat()?.lng, 'lng')}</p>
 </div>
 
 <style>
