@@ -1,13 +1,13 @@
 <script lang="ts">
-
+import { stats } from './Store';
 </script>
 
 <div>
     Square Mileage flooded: <strong>55,000 km<sup>2</sup></strong>
-    People Affected: <strong>{null}</strong>
-    People Displaced: <strong>{null}</strong>
-    People in Shelters: <strong>{null}</strong>
-    Fatalities: <strong>{null}</strong>
+    People Affected: <strong>{$stats}</strong>
+    People Displaced: <strong>{$stats}</strong>
+    People in Shelters: <strong>{$stats}</strong>
+    Fatalities: <strong>{$stats}</strong>
 
 </div>
 

@@ -7,3 +7,5 @@ const m = new Marker({ draggable: true });
 m.setLngLat([-122.031028, 37.410761]);
 map.subscribe((map) => m.addTo(map));
 export const marker: Writable<Marker> = writable(m);
+
+export const stats: Writable<number> = writable(0);

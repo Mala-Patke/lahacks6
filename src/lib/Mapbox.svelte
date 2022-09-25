@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
 	import mapboxgl, { Map } from 'mapbox-gl';
-	import { marker, map } from './Store';
+	import { marker, map, stats } from './Store';
 	import { boundsFromPoints, pointsFromCircle, polygonFromBounds } from './latLngUtil';
 
 	let container: HTMLElement;
@@ -23,15 +23,17 @@
 		});
 
 		$map.on('buttonPressed', () => {
+			console.log("The button has been pressed!");
+
 			if ($map.getSource('flood-data')) {
-				$map.removeSource('flood-data');
 				$map.removeLayer('flood-outline');
 				$map.removeLayer('flood-fill');
+				$map.removeSource('flood-data');
 			}
 
 			const circle = pointsFromCircle(
 				[$marker.getLngLat().lng, $marker.getLngLat().lat],
-				74/111, //74 km radius of 55,000 km^2 flooding divided by 111 km/lat
+				Math.sqrt(55000/Math.PI)/111, //Bruteforce the math lmao
 				360
 			);
 
@@ -44,7 +46,7 @@
 					type: 'Feature',
 					geometry: {
 						type: 'Polygon',
-						coordinates: [circle]
+						coordinates: [boundsRect]
 					},
 					properties: null
 				}
@@ -68,28 +70,97 @@
 				}
 			});
 
-			// console.log(
-			// 	$map.querySourceFeatures('population', {
-			// 		sourceLayer: 'population',
-			// 		filter: [
-			// 			'within',
-			// 			{
-			// 				type: 'Polygon',
-			// 				coordinates: [circle]
-			// 			}
-			// 		]
-			// 	})
-			// );
-			$map.setFilter('population', [
+			$map.addSource('flood-data-circle', {
+				type: 'geojson',
+				data: {
+					type: 'Feature',
+					geometry: {
+						type: 'Polygon',
+						coordinates: [circle]
+					},
+					properties: null
+				}
+			});
+
+			$map.addLayer({
+				id: 'flood-circle-outline',
+				type: 'line',
+				source: 'flood-data-circle',
+				paint: {
+					'line-width': 2
+				}
+			});
+
+			$map.addLayer({
+				id: 'flood-circle-fill',
+				type: 'fill',
+				source: 'flood-data-circle',
+				paint: {
+					'fill-opacity': 0.25
+				}
+			});
+			
+			let allFeatures = $map.querySourceFeatures('population', {
+			 	sourceLayer: 'population'
+			});
+
+			let features = 0;
+			for(let i = 0; i < allFeatures.length; i++) {
+				/*
+					Step 1: Get circle center from the circle thing
+					Step 2: Calculate distance between center and first coordinate
+					Step 3: If distance > radius, it's inside. Get the feature property or whatever.
+				*/
+
+				//@ts-ignore THERE IS A COORDINATE HERE TRUST ME
+				let coordinate = allFeatures[i].geometry.coordinates[0][0];
+				let center = [$marker.getLngLat().lng, $marker.getLngLat().lat];
+
+				let distance = Math.sqrt(
+					Math.pow(coordinate[0]-center[0], 2) +
+					Math.pow(coordinate[1]-center[1], 2)
+				);
+				let radius = Math.sqrt(
+					Math.pow(circle[0][0]-center[0],2) + 
+					Math.pow(circle[0][1]-center[1],2)
+				);
+
+				if(distance < radius) {
+					//WOOHOOO
+					features++;
+				}
+			}
+
+			stats.set(features)
+
+			/*
+			console.log(
+			 	$map.querySourceFeatures('population', {
+			 		sourceLayer: 'population',
+			 		filter: [
+						'within',
+			 			{
+			 				type: 'Feature',
+			 				geometry: {
+								type: 'LineString',
+								coordinates: bounds
+							},
+			 			}
+			 		]
+			 	}),
+			); */
+
+			/*$map.setFilter('population', [
 				'within',
 				{
 					type: 'Polygon',
 					coordinates: [circle]
 				}
-			]);
+			]);*/
 		});
 
 		$map.on('style.load', () => {
+			console.log('The style has loaded!')
 			$map.on('click', (e) => {
 				marker.update((marker) => marker.setLngLat(e.lngLat));
 			});
