@@ -13,8 +13,8 @@
 		const map = new Map({
 			container,
 			style: 'mapbox://styles/mapbox/dark-v10',
-			center: [-122.031028, 37.410761], // starting position [lng, lat]
-			zoom: 11
+			center: [-122.031028, 37.410761],
+			zoom: 7
 		});
 
 		map.on('style.load', () => {
@@ -52,12 +52,11 @@
 
 			map.addLayer({
 				id: 'street-data',
-				type: 'line',
+				type: 'fill',
 				source: 'mapbox-streets',
 				'source-layer': 'building',
 				paint: {
-					'line-color': '#69FFB4',
-					'line-width': 1
+					'fill-color': '#69FFB4'
 				}
 			});
 
@@ -68,7 +67,7 @@
 					type: 'Feature',
 					geometry: {
 						type: 'Polygon',
-						coordinates: [pointsFromCircle([-122.02, 37.4], 0.1, 360)]
+						coordinates: [pointsFromCircle([-122.02, 37.4], 130.3 / 111.32, 360)]
 					},
 					properties: null
 				}
@@ -76,10 +75,21 @@
 
 			map.addLayer({
 				id: 'my-layer',
+				type: 'fill',
+				source: 'my-source',
+				paint: {
+					'fill-color': '#69b4ff',
+					'fill-opacity': 0.25
+				}
+			});
+
+			map.addLayer({
+				id: 'my-layer-outline',
 				type: 'line',
 				source: 'my-source',
 				paint: {
-					'line-width': 2
+					'line-color': '#69b4ff',
+					'line-width': 1
 				}
 			});
 		});
