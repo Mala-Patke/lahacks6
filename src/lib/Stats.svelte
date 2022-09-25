@@ -13,6 +13,7 @@
 <style>
 	div {
 		position: absolute;
+		color: white;
 		right: 1vh;
 		bottom: 25vh;
 		z-index: 2;
