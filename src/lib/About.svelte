@@ -1,3 +1,5 @@
+
+
 <script lang="ts">
 	let x = false;
 	const toggleModal = () => {
@@ -18,6 +20,10 @@
 {/if}
 
 <style>
+    @font-face {
+        font-family: "DIN PRO";
+        src: url("../assets/DINPro400.otf");
+    }
 	.wrapper {
 		width: 100vw;
 		height: 100vh;
@@ -26,6 +32,7 @@
 		left: 0%;
 		backdrop-filter: blur(6px);
 		z-index: 3;
+        font-family: "DIN PRO";
 	}
 	.modal {
 		width: 70%;
@@ -42,6 +49,7 @@
 		position: absolute;
 		right: 2vh;
 		top: 2vh;
+        font-family: "DIN PRO";
 	}
 	.x-btn {
 		position: absolute;
@@ -49,5 +57,6 @@
 		background-color: transparent;
 		border-radius: 15px;
 		font-size: 30px;
+        font-family: "DIN PRO";
 	}
 </style>
