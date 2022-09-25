@@ -2,34 +2,61 @@
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
 	import mapboxgl, { Map } from 'mapbox-gl';
-	import { marker } from './Store';
+	import { marker, map, lgnLatState } from './Store';
 	import { pointsFromCircle } from './pointsFromCircle';
 
 	let container: HTMLElement;
 
 	mapboxgl.accessToken = token;
-
+	
 	onMount(() => {
-		const map = new Map({
+		$map = new Map({
 			container,
 			style: 'mapbox://styles/mapbox/dark-v10',
 			center: [-122.031028, 37.410761], // starting position [lng, lat]
 			zoom: 11
 		});
 
-		map.on('style.load', () => {
+		$map.on('buttonPressed', () => {
+			try {
+				$map.removeLayer('my-layer');
+				$map.removeSource('my-source');
+			} catch {}		
+			$map.addSource('my-source', {
+				type: 'geojson',
+				data: {
+					type: 'Feature',
+					geometry: {
+						type: 'Polygon',
+						coordinates: [pointsFromCircle([$marker.getLngLat().lng, $marker.getLngLat().lat], 0.1, 360)]
+					},
+					properties: null
+				}
+			});
+
+			$map.addLayer({
+				id: 'my-layer',
+				type: 'line',
+				source: 'my-source',
+				paint: {
+					'line-width': 2
+				}
+			});
+		});
+
+		$map.on('style.load', () => {
 			// terrain
-			map.addSource('mapbox-terrain', {
+			$map.addSource('mapbox-terrain', {
 				type: 'vector',
 				url: 'mapbox://mapbox.mapbox-terrain-v2'
 			});
 
-			map.on('click', (e) => {
+			$map.on('click', (e) => {
 				marker.update((m) => m.remove());
-				marker.set(new mapboxgl.Marker({ draggable: true }).setLngLat(e.lngLat).addTo(map));
+				marker.set(new mapboxgl.Marker({ draggable: true }).setLngLat(e.lngLat).addTo($map));
 			});
 
-			map.addLayer({
+			$map.addLayer({
 				id: 'terrain-data',
 				type: 'line',
 				source: 'mapbox-terrain',
@@ -45,12 +72,12 @@
 			});
 
 			// streets
-			map.addSource('mapbox-streets', {
+			$map.addSource('mapbox-streets', {
 				type: 'vector',
 				url: 'mapbox://mapbox.mapbox-streets-v8'
 			});
 
-			map.addLayer({
+			$map.addLayer({
 				id: 'street-data',
 				type: 'line',
 				source: 'mapbox-streets',
@@ -62,26 +89,6 @@
 			});
 
 			// custom
-			map.addSource('my-source', {
-				type: 'geojson',
-				data: {
-					type: 'Feature',
-					geometry: {
-						type: 'Polygon',
-						coordinates: [pointsFromCircle([-122.02, 37.4], 0.1, 360)]
-					},
-					properties: null
-				}
-			});
-
-			map.addLayer({
-				id: 'my-layer',
-				type: 'line',
-				source: 'my-source',
-				paint: {
-					'line-width': 2
-				}
-			});
 		});
 	});
 </script>
