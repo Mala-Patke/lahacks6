@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { marker } from './Store';
 
-	function round(num) {
+	function round(num: number) {
 		return Math.round(num * 100) / 100;
 	}
 </script>
