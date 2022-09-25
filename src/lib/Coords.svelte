@@ -20,14 +20,12 @@
 		bottom: 5vh;
 		z-index: 2;
 		background-color: rgba(26, 26, 26, 0.5);
-		border-radius: 5px;
-		width: 10%;
-		overflow: auto;
+		border-radius: 8px;
+		width: auto;
 		height: 7.5%;
 		font-family: 'DIN PRO';
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		justify-content: center;
 	}
 
