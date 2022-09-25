@@ -3,7 +3,7 @@
 	import { token } from './TOKEN.json';
 	import mapboxgl, { Map } from 'mapbox-gl';
 	import { marker, map } from './Store';
-	import { pointsFromCircle } from './pointsFromCircle';
+	import { boundsFromPoints, pointsFromCircle, polygonFromBounds } from './latLngUtil';
 
 	let container: HTMLElement;
 
@@ -23,37 +23,70 @@
 		});
 
 		$map.on('buttonPressed', () => {
-			try {
-				$map.removeLayer('my-layer');
-				$map.removeSource('my-source');
-			} catch (e) {}
+			if ($map.getSource('flood-data')) {
+				$map.removeSource('flood-data');
+				$map.removeLayer('flood-outline');
+				$map.removeLayer('flood-fill');
+			}
 
-			$map.addSource('my-source', {
+			const circle = pointsFromCircle(
+				[$marker.getLngLat().lng, $marker.getLngLat().lat],
+				0.1,
+				360
+			);
+
+			const bounds = boundsFromPoints(circle);
+			const boundsRect = polygonFromBounds(bounds);
+
+			$map.addSource('flood-data', {
 				type: 'geojson',
 				data: {
 					type: 'Feature',
 					geometry: {
 						type: 'Polygon',
-						coordinates: [
-							pointsFromCircle(
-								[$marker.getLngLat().lng, $marker.getLngLat().lat],
-								0.1,
-								360
-							)
-						]
+						coordinates: [circle]
 					},
 					properties: null
 				}
 			});
 
 			$map.addLayer({
-				id: 'my-layer',
+				id: 'flood-outline',
 				type: 'line',
-				source: 'my-source',
+				source: 'flood-data',
 				paint: {
 					'line-width': 2
 				}
 			});
+
+			$map.addLayer({
+				id: 'flood-fill',
+				type: 'fill',
+				source: 'flood-data',
+				paint: {
+					'fill-opacity': 0.25
+				}
+			});
+
+			// console.log(
+			// 	$map.querySourceFeatures('population', {
+			// 		sourceLayer: 'population',
+			// 		filter: [
+			// 			'within',
+			// 			{
+			// 				type: 'Polygon',
+			// 				coordinates: [circle]
+			// 			}
+			// 		]
+			// 	})
+			// );
+			$map.setFilter('population', [
+				'within',
+				{
+					type: 'Polygon',
+					coordinates: [circle]
+				}
+			]);
 		});
 
 		$map.on('style.load', () => {

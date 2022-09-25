@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { prettyPrintDecimalDegrees } from './formatLatOrLng';
+	import { prettyPrintDecimalDegrees } from './decimalDegrees';
 	import { marker } from './Store';
 </script>
 
@@ -21,7 +21,7 @@
 		z-index: 2;
 		background-color: gray;
 		border-radius: 5px;
-		width: 10%;
+		width: 20%;
 		height: 7.5%;
 		font-family: 'DIN PRO';
 		display: flex;
