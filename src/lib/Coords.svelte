@@ -9,6 +9,11 @@
 </div>
 
 <style>
+	@font-face {
+        font-family: "DIN PRO";
+        src: url("../assets/DINPro400.otf");
+    }
+
 	div {
 		position: absolute;
 		top: 30%;
@@ -18,6 +23,7 @@
 		border-radius: 5px;
 		width: 15%;
 		height: 7.5%;
+		font-family: "DIN PRO";
 	}
 
 	p {
