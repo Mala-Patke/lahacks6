@@ -2,7 +2,6 @@
     let x = false;
     const toggleModal = () => {
         x = !x;
-        console.log(x);
     }
 </script>
 
@@ -15,7 +14,7 @@
 {/if}
 
 {#if !x}
-    <button class="abt-btn" on:click={toggleModal}>About</button>
+    <button class="about-btn" on:click={toggleModal}>About</button>
 {/if}
 
 <style>
@@ -26,6 +25,7 @@
         top: 0%;
         left: 0%;
 		backdrop-filter: blur(6px);
+        z-index: 3;
     }
     .modal {
         width: 70%;
@@ -35,12 +35,17 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #242424;
-        border: 5px solid #888;
+        border: 5px solid #ff69b4;
         border-radius: 15px;
+    }
+    .about-btn {
+        position: absolute;
+        right: 2vh;
+        top: 2vh;
     }
     .x-btn {
         position: absolute;
-        right: 0px;
+        right: 0;
         background-color: transparent;
         border-radius: 15px;
         font-size: 30px;
