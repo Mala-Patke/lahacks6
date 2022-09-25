@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { token } from './TOKEN.json';
 	import mapboxgl, { Map } from 'mapbox-gl';
-	import { marker, map, lgnLatState } from './Store';
+	import { marker, map } from './Store';
 	import { pointsFromCircle } from './pointsFromCircle';
 
 	let container: HTMLElement;
@@ -53,7 +53,7 @@
 
 			$map.on('click', (e) => {
 				marker.update((m) => m.remove());
-				marker.set(new mapboxgl.Marker({ draggable: true }).setLngLat(e.lngLat).addTo($map));
+				marker.set(new mapboxgl.Marker().setLngLat(e.lngLat).addTo($map));
 			});
 
 			$map.addLayer({

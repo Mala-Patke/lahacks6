@@ -1,24 +1,16 @@
 <script lang="ts">
 import { map } from "./Store";
-
-function onClick() {
-    $map.fire('buttonPressed');    
-}
 </script>
 
 <div>
-    <button on:click={onClick}>Flood!</button>
+    <button on:click={() => $map.fire('buttonPressed')}>Flood!</button>
 </div>
 
 <style>
-    div {
+    button {
 		position: absolute;
-		top: 30%;
-		right: 2%;
+		top: 40%;
+		left: 2%;
 		z-index: 2;
-		background-color: gray;
-		border-radius: 5px;
-		width: 15%;
-		height: 7.5%;
 	}
 </style>
