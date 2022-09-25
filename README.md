@@ -6,6 +6,8 @@ Climate change is an issue our generation is all too familiar with. Now, the dis
 ## Functionality
 Flood is Thicker than Water is data visualization tool built around damage from potential floods. Users may select a location and observe the size and effects of these floods. The program provides 5 statistics for a selected area:
 
+> Square Mileage Flooded
+
 > Number of People Affected
 
 > Number of People Displaced

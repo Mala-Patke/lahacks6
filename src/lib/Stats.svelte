@@ -3,7 +3,7 @@
 </script>
 
 <div>
-	Square Mileage flooded: <strong>55,000 km<sup>2</sup></strong>
+	Square Mileage Flooded: <strong>55,000 km<sup>2</sup></strong>
 	People Affected: <strong>{$stats.toLocaleString()}</strong>
 	People Displaced: <strong>{$stats.toLocaleString()}</strong>
 	People in Shelters: <strong>{$stats.toLocaleString()}</strong>
