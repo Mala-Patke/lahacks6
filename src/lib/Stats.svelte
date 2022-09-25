@@ -1,14 +1,13 @@
 <script lang="ts">
-import { stats } from './Store';
+	import { stats } from './Store';
 </script>
 
 <div>
-    Square Mileage flooded: <strong>55,000 km<sup>2</sup></strong>
-    People Affected: <strong>{$stats}</strong>
-    People Displaced: <strong>{$stats}</strong>
-    People in Shelters: <strong>{$stats}</strong>
-    Fatalities: <strong>{$stats}</strong>
-
+	Square Mileage flooded: <strong>55,000 km<sup>2</sup></strong>
+	People Affected: <strong>{$stats.toLocaleString()}</strong>
+	People Displaced: <strong>{$stats.toLocaleString()}</strong>
+	People in Shelters: <strong>{$stats.toLocaleString()}</strong>
+	Fatalities: <strong>{$stats.toLocaleString()}</strong>
 </div>
 
 <style>
@@ -18,11 +17,11 @@ import { stats } from './Store';
 		bottom: 25vh;
 		z-index: 2;
 		background-color: rgba(26, 26, 26);
-        border: 1px solid rgba(255, 255, 255, 0.87);
+		border: 1px solid rgba(255, 255, 255, 0.87);
 		border-radius: 5px;
 		overflow: auto;
 		height: 40%;
-        width: 30vh;
+		width: 30vh;
 		font-family: 'DIN PRO';
 		display: flex;
 		flex-direction: column;
@@ -30,8 +29,8 @@ import { stats } from './Store';
 		justify-content: center;
 	}
 
-    strong {
-        font-weight: 900; /* IT DOESN'T BOLD */
-        font-size: larger;
-    }
+	strong {
+		font-weight: 900; /* IT DOESN'T BOLD */
+		font-size: larger;
+	}
 </style>
