@@ -4,7 +4,7 @@
 	import About from './lib/About.svelte';
 	import FloodButton from './lib/FloodButton.svelte';
 	import Stats from './lib/Stats.svelte';
-	import Help form './lib/Help.svelte';
+	import Help from './lib/Help.svelte';
 </script>
 
 <main>
