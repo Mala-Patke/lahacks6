@@ -8,8 +8,6 @@
     People Displaced: <strong>{null}</strong>
     People in Shelters: <strong>{null}</strong>
     Fatalities: <strong>{null}</strong>
-    Buildings damaged: <strong>{null}</strong>
-    Cost of Flooding: <strong>{null}</strong>
 
 </div>
 
