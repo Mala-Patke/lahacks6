@@ -17,21 +17,26 @@
 			zoom: 5,
 			// prevent people from looking at missing data
 			maxBounds: [
-				[-168, -80],
-				[-21, 80]
+				[-174.205883, -54.809886],
+				[0.002152, 76.41997]
 			]
 		});
 
 		$map.on('buttonPressed', () => {
 			if ($map.getSource('flood-data')) {
-				$map.removeSource('flood-data');
 				$map.removeLayer('flood-outline');
 				$map.removeLayer('flood-fill');
+				$map.removeSource('flood-data');
 			}
 
+			const centerPoint: [number, number] = [
+				$marker.getLngLat().lng,
+				$marker.getLngLat().lat
+			];
+
 			const circle = pointsFromCircle(
-				[$marker.getLngLat().lng, $marker.getLngLat().lat],
-				74/111, //74 km radius of 55,000 km^2 flooding divided by 111 km/lat
+				centerPoint,
+				74 / 111, //74 km radius of 55,000 km^2 flooding divided by 111 km/lat
 				360
 			);
 
@@ -68,25 +73,11 @@
 				}
 			});
 
-			// console.log(
-			// 	$map.querySourceFeatures('population', {
-			// 		sourceLayer: 'population',
-			// 		filter: [
-			// 			'within',
-			// 			{
-			// 				type: 'Polygon',
-			// 				coordinates: [circle]
-			// 			}
-			// 		]
-			// 	})
-			// );
-			$map.setFilter('population', [
-				'within',
-				{
-					type: 'Polygon',
-					coordinates: [circle]
-				}
-			]);
+			console.log(
+				$map.querySourceFeatures('mapbox-streets', {
+					sourceLayer: 'buildings'
+				})
+			);
 		});
 
 		$map.on('style.load', () => {
