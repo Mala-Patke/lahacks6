@@ -9,6 +9,15 @@
 	<div class="wrapper">
 		<div class="modal">
 			<button class="x-btn" on:click={toggleModal}>x</button>
+            <div>
+                <h2>About Project Name</h2>
+                <p>
+                    Each topic presents distinct yet related questions with varying scope and scale in 
+                    time, space, and the people involved. Attempts to understand and manage the mechanisms at work 
+                    in floodplains have been made for six millennia. Flood waters typically inundate farm 
+                    land, making the land unworkable and preventing crops from being planted or harvested.
+                </p>
+            </div>
 		</div>
 	</div>
 {/if}
@@ -42,7 +51,31 @@
 		background-color: #242424;
 		border: 5px solid #35A2C3;
 		border-radius: 15px;
+
 	}
+
+    .modal div {
+        width: 80%;
+        height: 80%;
+        position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 28px;
+        line-height: 1.3em;
+    }
 	.about-btn {
 		position: absolute;
 		right: 2vh;

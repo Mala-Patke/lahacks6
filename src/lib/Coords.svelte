@@ -21,7 +21,7 @@
 		z-index: 2;
 		background-color: rgba(26, 26, 26, 0.5);
 		border-radius: 5px;
-		width: 20%;
+		width: 10%;
 		overflow: auto;
 		height: 7.5%;
 		font-family: 'DIN PRO';
