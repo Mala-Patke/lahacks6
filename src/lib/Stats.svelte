@@ -5,7 +5,7 @@
 <div>
     Square Mileage flooded: <strong>55,000 km<sup>2</sup></strong>
     People Affected: <strong>{null}</strong>
-    People Temporarily Displaced: <strong>{null}</strong>
+    People Displaced: <strong>{null}</strong>
     People in Shelters: <strong>{null}</strong>
     Fatalities: <strong>{null}</strong>
     Buildings damaged: <strong>{null}</strong>
