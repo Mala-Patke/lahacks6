@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 
 # Secrets 🤫
-src/lib/TOKEN.json
+# src/lib/TOKEN.json
+# just kidding my account is getting banned on oct 1th lol
