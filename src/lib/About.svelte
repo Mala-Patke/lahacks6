@@ -10,12 +10,12 @@
 		<div class="modal">
 			<button class="x-btn" on:click={toggleModal}>x</button>
             <div>
-                <h2>About Project Name</h2>
+                <h2>About Flood is Thicker than Water</h2>
                 <p>
                     This summer, seasonal rains in Pakistan spiraled into extreme flooding, covering 1/3 of the 
                     country and displacing 1/6 of the population. Often, tragedies like this must compete against 
                     mainstream news and it's easy to lose sight of the humanity behind the statistics. Through 
-                    [PROJECT NAME], we aim to remove this separation and better capture the devastating impact of the floods.
+                    Flood is Thicker than Water, we aim to remove this separation and better capture the devastating impact of the floods.
                 </p>
             </div>
 		</div>
