@@ -28,10 +28,10 @@
 {/if}
 
 <style>
-    @font-face {
-        font-family: "DIN PRO";
-        src: url("../assets/DINPro400.otf");
-    }
+    	@font-face {
+        	font-family: "DIN PRO";
+        	src: url("../assets/DINPro400.otf");
+	}	
 
 	.wrapper {
 		width: 100vw;
@@ -41,7 +41,7 @@
 		left: 0%;
 		backdrop-filter: blur(6px);
 		z-index: 3;
-        font-family: "DIN PRO";
+        	font-family: "DIN PRO";
 	}
 
 	.modal {
@@ -56,37 +56,37 @@
 		border-radius: 15px;
 	}
 
-    .modal div {
-        width: 80%;
-        height: 80%;
-        position: fixed;
+	.modal div {
+		width: 80%;
+        	height: 80%;
+        	position: fixed;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+        	display: flex;
+        	flex-direction: column;
+        	justify-content: center;
+        	align-items: center;
+        	text-align: center;
+	}
 
-    h2 {
-        font-size: 36px;
-		color: white;
-    }
+	h2 {
+        	font-size: 36px;
+		color: #FFFFFF;
+	}
 
-    p {
-        font-size: 24px;
-        line-height: 1.3em;
-    }
+	p {
+        	font-size: 24px;
+        	line-height: 1.3em;
+	}
 
 	.about-btn {
 		position: absolute;
 		right: 2vh;
 		top: 2vh;
-        font-family: "DIN PRO";
-        border: 1px solid rgba(255, 255, 255, 0.87);
-	}
+        	font-family: "DIN PRO";
+        	border: 1px solid rgba(255, 255, 255, 0.87);
+    	}
 
 	.x-btn {
 		position: absolute;
@@ -94,6 +94,6 @@
 		background-color: transparent;
 		border-radius: 15px;
 		font-size: 30px;
-        font-family: "DIN PRO";
+        	font-family: "DIN PRO";
 	}
 </style>
