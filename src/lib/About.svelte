@@ -48,6 +48,7 @@
 		right: 2vh;
 		top: 2vh;
         font-family: "DIN PRO";
+        border: 1px solid rgba(255, 255, 255, 0.87);
 	}
 	.x-btn {
 		position: absolute;

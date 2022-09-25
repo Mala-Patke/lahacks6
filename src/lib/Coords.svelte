@@ -16,12 +16,13 @@
 
 	div {
 		position: absolute;
-		top: 30%;
-		left: 2%;
+		left: 1vh;
+		bottom: 5vh;
 		z-index: 2;
-		background-color: gray;
+		background-color: rgba(26, 26, 26, 0.5);
 		border-radius: 5px;
 		width: 20%;
+		overflow: auto;
 		height: 7.5%;
 		font-family: 'DIN PRO';
 		display: flex;
