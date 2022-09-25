@@ -31,7 +31,7 @@
 
 			const circle = pointsFromCircle(
 				[$marker.getLngLat().lng, $marker.getLngLat().lat],
-				0.1,
+				74/111, //74 km radius of 55,000 km^2 flooding divided by 111 km/lat
 				360
 			);
 

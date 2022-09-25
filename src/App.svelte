@@ -3,6 +3,7 @@
 	import Coords from './lib/Coords.svelte';
 	import About from './lib/About.svelte';
 	import FloodButton from './lib/FloodButton.svelte';
+  import Stats from './lib/Stats.svelte';
 </script>
 
 <main>
@@ -10,4 +11,5 @@
 	<Coords />
 	<About />
   <FloodButton />
+  <Stats/>
 </main>
