@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
 	let x = false;
 	const toggleModal = () => {
@@ -42,7 +40,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		background-color: #242424;
-		border: 5px solid #ff69b4;
+		border: 5px solid #35A2C3;
 		border-radius: 15px;
 	}
 	.about-btn {
