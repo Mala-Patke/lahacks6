@@ -23,7 +23,7 @@
 		});
 
 		$map.on('buttonPressed', () => {
-			console.log("The button has been pressed!");
+			console.log('The button has been pressed!');
 
 			if ($map.getSource('flood-data')) {
 				$map.removeLayer('flood-outline');
@@ -31,19 +31,11 @@
 				$map.removeSource('flood-data');
 			}
 
-			const centerPoint: [number, number] = [
-				$marker.getLngLat().lng,
-				$marker.getLngLat().lat
-			];
-
 			const circle = pointsFromCircle(
 				[$marker.getLngLat().lng, $marker.getLngLat().lat],
-				Math.sqrt(55000/Math.PI)/111, //Bruteforce the math lmao
+				Math.sqrt(55000 / Math.PI) / 111, //Bruteforce the math lmao
 				360
 			);
-
-			const bounds = boundsFromPoints(circle);
-			const boundsRect = polygonFromBounds(bounds);
 
 			$map.addSource('flood-data', {
 				type: 'geojson',
@@ -51,7 +43,7 @@
 					type: 'Feature',
 					geometry: {
 						type: 'Polygon',
-						coordinates: [boundsRect]
+						coordinates: [circle]
 					},
 					properties: null
 				}
@@ -75,68 +67,35 @@
 				}
 			});
 
-			$map.addSource('flood-data-circle', {
-				type: 'geojson',
-				data: {
-					type: 'Feature',
-					geometry: {
-						type: 'Polygon',
-						coordinates: [circle]
-					},
-					properties: null
-				}
-			});
-
-			$map.addLayer({
-				id: 'flood-circle-outline',
-				type: 'line',
-				source: 'flood-data-circle',
-				paint: {
-					'line-width': 2
-				}
-			});
-
-			$map.addLayer({
-				id: 'flood-circle-fill',
-				type: 'fill',
-				source: 'flood-data-circle',
-				paint: {
-					'fill-opacity': 0.25
-				}
-			});
-			
 			let allFeatures = $map.querySourceFeatures('population', {
-			 	sourceLayer: 'population'
+				sourceLayer: 'population'
 			});
 
-			let features = 0;
-			for(let i = 0; i < allFeatures.length; i++) {
+			let population = 0;
+			for (let i = 0; i < allFeatures.length; i++) {
 				/*
 					Step 1: Get circle center from the circle thing
 					Step 2: Calculate distance between center and first coordinate
 					Step 3: If distance > radius, it's inside. Get the feature property or whatever.
 				*/
 
-				//@ts-ignore THERE IS A COORDINATE HERE TRUST ME
-				let coordinate = allFeatures[i].geometry.coordinates[0][0];
-				let center = [$marker.getLngLat().lng, $marker.getLngLat().lat];
+				// @ts-ignore THERE IS A COORDINATE HERE TRUST ME
+				const coordinate = allFeatures[i].geometry.coordinates[0][0];
+				const center: [number, number] = [$marker.getLngLat().lng, $marker.getLngLat().lat];
 
-				let distance = Math.sqrt(
-					Math.pow(coordinate[0]-center[0], 2) +
-					Math.pow(coordinate[1]-center[1], 2)
+				const distance = Math.sqrt(
+					Math.pow(coordinate[0] - center[0], 2) + Math.pow(coordinate[1] - center[1], 2)
 				);
-				let radius = Math.sqrt(
-					Math.pow(circle[0][0]-center[0],2) + 
-					Math.pow(circle[0][1]-center[1],2)
+				const radius = Math.sqrt(
+					Math.pow(circle[0][0] - center[0], 2) + Math.pow(circle[0][1] - center[1], 2)
 				);
 
-				if(distance < radius) {
-					//WOOHOOO
-					features++;
+				if (distance < radius) {
+					population += allFeatures[i].properties!.DN;
 				}
 			}
 
-			stats.set(features)
+			stats.set(population);
 
 			/*
 			console.log(
@@ -165,7 +124,7 @@
 		});
 
 		$map.on('style.load', () => {
-			console.log('The style has loaded!')
+			console.log('The style has loaded!');
 			$map.on('click', (e) => {
 				marker.update((marker) => marker.setLngLat(e.lngLat));
 			});
