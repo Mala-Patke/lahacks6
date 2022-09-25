@@ -13,8 +13,8 @@
 		$map = new Map({
 			container,
 			style: 'mapbox://styles/mapbox/dark-v10',
-			center: [-122.031028, 37.410761], // starting position [lng, lat]
-			zoom: 11
+			center: [-122.031028, 37.410761],
+			zoom: 7
 		});
 
 		$map.on('buttonPressed', () => {
@@ -79,12 +79,11 @@
 
 			$map.addLayer({
 				id: 'street-data',
-				type: 'line',
+				type: 'fill',
 				source: 'mapbox-streets',
 				'source-layer': 'building',
 				paint: {
-					'line-color': '#69FFB4',
-					'line-width': 1
+					'fill-color': '#69FFB4'
 				}
 			});
 
