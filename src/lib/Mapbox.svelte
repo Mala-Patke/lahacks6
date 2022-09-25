@@ -16,10 +16,10 @@
 			center: [-122.031028, 37.410761],
 			zoom: 5,
 			// prevent people from looking at missing data
-			/* maxBounds: [
+			maxBounds: [
 				[-168, -80],
 				[-21, 80]
-			] */
+			]
 		});
 
 		$map.on('buttonPressed', () => {
@@ -38,7 +38,7 @@
 						coordinates: [
 							pointsFromCircle(
 								[$marker.getLngLat().lng, $marker.getLngLat().lat],
-								3, // 74 km radius and 111 km/lat
+								74/111, // 74 km radius at 55000 km^2 flooding and 111 km/lat on average.
 								360
 							)
 						]
