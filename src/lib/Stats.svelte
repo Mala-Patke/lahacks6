@@ -4,10 +4,10 @@
 
 <div>
 	Square Mileage Flooded: <strong>55,000 km<sup>2</sup></strong>
-	People Affected: <strong>{$stats.toLocaleString()}</strong>
-	People Displaced: <strong>{$stats.toLocaleString()}</strong>
-	People in Shelters: <strong>{$stats.toLocaleString()}</strong>
-	Fatalities: <strong>{$stats.toLocaleString()}</strong>
+	People Affected: <strong>{Math.round($stats).toLocaleString()}</strong>
+	People Displaced: <strong>{Math.round($stats/4).toLocaleString()}</strong>
+	People in Shelters: <strong>{Math.round($stats*(3/160)).toLocaleString()}</strong>
+	Fatalities: <strong>{Math.round($stats*(3/64000)).toLocaleString()}</strong>
 </div>
 
 <style>
